@@ -149,11 +149,10 @@ You can also use Monolog's Formatters like shown below:
                         <formatter>
                             <class>LogstashFormatter</class>
                             <args>
-                                <application_name><![CDATA[MyAppName]]></application_name>
-                                <system_name><![CDATA[]]></system_name>
-                                <extra_prefix><![CDATA[]]></extra_prefix>
-                                <context_prefix><![CDATA[]]></context_prefix>
-                                <version><![CDATA[]]></version>
+                                <applicationName><![CDATA[MyAppName]]></applicationName>
+                                <systemName><![CDATA[]]></systemName>
+                                <extraKey><![CDATA[]]></extraKey>
+                                <contextKey><![CDATA[]]></contextKey>
                             </args>
                         </formatter>
                     </StreamHandler>
