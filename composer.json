@@ -12,7 +12,6 @@
     "require": {
         "php": "^7.4||^8.0",
         "magento-hackathon/magento-composer-installer": "*",
-        "firegento/psr0autoloader": "*",
         "monolog/monolog": "*"
     },
     "repositories": [
