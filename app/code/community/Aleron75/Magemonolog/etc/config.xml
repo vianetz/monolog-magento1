@@ -35,7 +35,7 @@
                         <useLocking>false</useLocking>
                     </params>
                     <!--<formatter>
-                        <class>LogstashFormatter</class>
+                        <class>Monolog\Formatter\LogstashFormatter</class>
                         <args>
                             <applicationName><![CDATA[MyAppName]]></applicationName>
                             <systemName><![CDATA[]]></systemName>
@@ -64,6 +64,16 @@
                     </params>
                 </NewRelicHandler>
             </handlers>
+            <processors>
+                <psr_log_message>
+                    <active>1</active>
+                    <class>Monolog\Processor\PsrLogMessageProcessor</class>
+                </psr_log_message>
+                <web>
+                    <active>1</active>
+                    <class>Monolog\Processor\WebProcessor</class>
+                </web>
+            </processors>
         </magemonolog>
     </default>
 </config>

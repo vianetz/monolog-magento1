@@ -1,15 +1,14 @@
-magemonolog
+Monolog Extension for Magento 1/OpenMage
 ===========
 
 Facts
 -----
-Version: 0.2.2
-Developed (and tested) on Magento CE v 1.8.1.0
+Developed and tested on OpenMage 20.5
 
 Introduction
 ------------
 
-A Magento extension which provides a custom writer model to transparently use 
+A Magento Extension which provides a custom writer model to transparently use 
 Monolog as logging library.
 
 The following Monolog's Handlers are supported at the moment:
@@ -147,7 +146,7 @@ You can also use Monolog's Formatters like shown below:
                             <useLocking>false</useLocking>
                         </params>
                         <formatter>
-                            <class>LogstashFormatter</class>
+                            <class>Monolog\Formatter\LogstashFormatter</class>
                             <args>
                                 <applicationName><![CDATA[MyAppName]]></applicationName>
                                 <systemName><![CDATA[]]></systemName>
