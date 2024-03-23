@@ -8,13 +8,7 @@ class Aleron75_Magemonolog_Model_HandlerWrapper_StreamHandler extends Aleron75_M
     public function __construct(array $args)
     {
         $this->_validateArgs($args);
-        $this->_handler = new StreamHandler(
-            $args['stream'],
-            $args['level'],
-            $args['bubble'],
-            $args['filePermission'],
-            $args['useLocking']
-        );
+        $this->_handler = new StreamHandler(...$args);
     }
 
     protected function _validateArgs(array &$args)

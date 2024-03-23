@@ -5,6 +5,7 @@
             <version>0.4.0</version>
         </Aleron75_Magemonolog>
     </modules>
+
     <global>
         <models>
             <magemonolog>
@@ -22,13 +23,15 @@
             </core>
         </log>
     </global>
+
     <default>
         <magemonolog>
             <handlers>
-                <StreamHandler>
+                <default_magento_file_stream>
                     <active>1</active>
+                    <class>Aleron75_Magemonolog_Model_HandlerWrapper_StreamHandler</class>
                     <params>
-                        <stream>magemonolog.log</stream>
+                        <stream>%channel%.log</stream>
                         <level>DEBUG</level>
                         <bubble>true</bubble>
                         <filePermission>null</filePermission>
@@ -43,7 +46,7 @@
                             <contextKey><![CDATA[]]></contextKey>
                         </args>
                     </formatter>-->
-                </StreamHandler>
+                </default_magento_file_stream>
                 <NativeMailHandler>
                     <active>0</active>
                     <params>

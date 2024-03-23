@@ -139,7 +139,7 @@ You can also use Monolog's Formatters like shown below:
                     <StreamHandler>
                         <active>1</active>
                         <params>
-                            <stream>magemonolog.log</stream>
+                            <stream>%channel%.log</stream>
                             <level>DEBUG</level>
                             <bubble>true</bubble>
                             <filePermission>null</filePermission>

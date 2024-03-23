@@ -5,10 +5,10 @@ use Monolog\Logger;
 
 final class Aleron75_Magemonolog_Model_Logwriter extends Zend_Log_Writer_Abstract
 {
-    protected Monolog\Logger $logger;
+    private Monolog\Logger $logger;
 
     /** Array used to map Zend's log levels into Monolog's */
-    protected array $_levelMap = [
+    private array $levelMap = [
         Zend_Log::EMERG => \Monolog\Level::Emergency,
         Zend_Log::ALERT => \Monolog\Level::Alert,
         Zend_Log::CRIT => \Monolog\Level::Critical,
@@ -22,13 +22,14 @@ final class Aleron75_Magemonolog_Model_Logwriter extends Zend_Log_Writer_Abstrac
     /** @throws \ReflectionException */
     public function __construct(string $logFile)
     {
-        $this->logger = Mage::getSingleton('magemonolog/loggerFactory')->create($logFile);
+        $channelName = Mage::helper('magemonolog')->getChannelNameByFile($logFile);
+        $this->logger = Mage::getSingleton('magemonolog/loggerFactory')->createFromConfig($channelName);
     }
 
     /** @param array $event event data */
     protected function _write($event): void
     {
-        $level = $this->_levelMap[$event['priority']];
+        $level = $this->levelMap[$event['priority']];
         $this->logger->addRecord($level, $event['message']);
     }
 

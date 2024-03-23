@@ -5,37 +5,40 @@ use Monolog\Logger;
 
 final class Aleron75_Magemonolog_Model_LoggerFactory
 {
-    public function create(string $logFile = null): \Psr\Log\LoggerInterface
-    {
-        $logger = new Logger(Mage::getStoreConfig('magemonolog/name') ?? 'magento');
+    private const DEFAULT_CHANNEL_NAME = 'magento';
 
-        $this->addHandlers($logger, $logFile);
+    public function createFromConfig(string $channelName = null): \Psr\Log\LoggerInterface
+    {
+        $logger = new Logger($channelName ?? self::DEFAULT_CHANNEL_NAME);
+
+        $this->addHandlers($logger);
         $this->addProcessors($logger);
 
         return $logger;
     }
 
-    private function addHandlers(\Psr\Log\LoggerInterface $logger, string $logFile = null): void
+    private function addHandlers(\Psr\Log\LoggerInterface $logger): void
     {
         $handlers = Mage::getStoreConfig('magemonolog/handlers');
         if (! is_array($handlers)) {
             return;
         }
 
-        foreach ($handlers as $handlerModel => $handlerValues) {
-            if (! Mage::getStoreConfigFlag('magemonolog/handlers/' . $handlerModel . '/active')) {
+        foreach ($handlers as $config) {
+            if (! isset($config['active']) || ! $config['active']) {
                 continue;
             }
 
-            $args = $handlerValues['params'] ?? [];
-            if (! empty($logFile)){
-                $logFileParts = explode(DS, $logFile);
-                $args['stream'] = array_pop($logFileParts);
+            $args = $config['params'] ?? [];
+            // we can create a separate log file per channel
+            if (isset($args['stream'])) {
+                $args['stream'] = str_replace('%channel%', $logger->getName(), $args['stream']);
             }
 
-            $handlerWrapper = Mage::getModel('magemonolog/handlerWrapper_' . $handlerModel, $args);
-            if (isset($handlerValues['formatter']['class'])) {
-                $formatter = new $handlerValues['formatter']['class'](...$handlerValues['formatter']['args']);
+            $handlerWrapper = Mage::getModel($config['class'], $args);
+            assert($handlerWrapper instanceof Aleron75_Magemonolog_Model_HandlerWrapper_HandlerInterface);
+            if (isset($config['formatter']['class'])) {
+                $formatter = new $config['formatter']['class'](...$config['formatter']['args']);
                 $handlerWrapper->setFormatter($formatter);
             }
 

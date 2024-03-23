@@ -38,5 +38,4 @@ abstract class Aleron75_Magemonolog_Model_HandlerWrapper_AbstractHandler impleme
             $this->_handler->setFormatter($formatter);
         }
     }
-
 }
