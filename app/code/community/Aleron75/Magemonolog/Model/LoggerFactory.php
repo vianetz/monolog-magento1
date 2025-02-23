@@ -7,7 +7,7 @@ final class Aleron75_Magemonolog_Model_LoggerFactory
 {
     private const DEFAULT_CHANNEL_NAME = 'magento';
 
-    public function createFromConfig(string $channelName = null): \Psr\Log\LoggerInterface
+    public function createFromConfig(?string $channelName = null): \Psr\Log\LoggerInterface
     {
         $logger = new Logger($channelName ?? self::DEFAULT_CHANNEL_NAME);
 

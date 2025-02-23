@@ -1,13 +1,6 @@
 Monolog Extension for Magento 1/OpenMage
 ===========
 
-Facts
------
-Developed and tested on OpenMage 20.5
-
-Introduction
-------------
-
 A Magento Extension which provides a custom writer model to transparently use 
 Monolog as logging library.
 
@@ -20,37 +13,9 @@ The following Monolog's Handlers are supported at the moment:
 Installation
 ------------
 
-You can install this extension in several ways:
-
-**Download**
-
-Download the full package, copy the content of the `app` directory
-in your Magento base directory; pay attention not to overwrite
-the `app` folder, only merge its contents into existing directory;
-
-**Modman**
-
-Install modman Module Manager: https://github.com/colinmollenhour/modman
-
-After having installed modman on your system, you can clone this module on your
-Magento base directory by typing the following command:
-
-    $ modman init
-    $ modman clone git@github.com:aleron75/magemonolog.git
-
-**Composer**
-
-Install composer: http://getcomposer.org/download/
-
-Install Magento Composer: https://github.com/magento-hackathon/magento-composer-installer
-
-Type the following command:
-
-    $ php composer.phar require aleron75/magemonolog:dev-master
-
-or
-
-    $ composer require aleron75/magemonolog:dev-master
+```
+composer require aleron75/magemonolog
+```
 
 **Common tasks**
 

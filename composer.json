@@ -1,23 +1,28 @@
 {
-    "name": "aleron75/magemonolog",
-    "description": "A Magento Extension to transparently use Monolog as logging library.",
-    "type": "magento-module",
-    "license": "OSL-3.0",
-    "authors": [
-        {
-            "name": "Alessandro Ronchi",
-            "email": "aleron75@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^7.4||^8.0",
-        "magento-hackathon/magento-composer-installer": "*",
-        "monolog/monolog": "^3.5"
+  "name": "aleron75/magemonolog",
+  "description": "A Magento Extension to transparently use Monolog as logging library.",
+  "type": "magento-module",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "name": "Alessandro Ronchi",
+      "email": "aleron75@gmail.com"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.firegento.com"
-        }
-    ]
+    {
+      "name": "Christoph Massmann",
+      "email": "cm@vianetz.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.4||^8.0",
+    "magento-hackathon/magento-composer-installer": "*",
+    "monolog/monolog": "^3.5"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.firegento.com"
+    }
+  ]
 }
