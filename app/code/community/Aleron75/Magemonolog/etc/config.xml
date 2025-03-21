@@ -49,6 +49,7 @@
                 </default_magento_file_stream>
                 <NativeMailHandler>
                     <active>0</active>
+                    <class>Aleron75_Magemonolog_Model_HandlerWrapper_NativeMailHandler</class>
                     <params>
                         <to>dummy@example.com</to>
                         <subject>Log</subject>
@@ -60,6 +61,7 @@
                 </NativeMailHandler>
                 <NewRelicHandler>
                     <active>0</active>
+                    <class>Aleron75_Magemonolog_Model_HandlerWrapper_NewRelicHandler</class>
                     <params>
                         <level>ERROR</level>
                         <bubble>true</bubble>

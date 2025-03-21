@@ -47,47 +47,7 @@ which instructs Magento to use a custom log writer class when logging via the
 The configured `Aleron75_Magemonolog_Model_Logwriter` class is a wrapper for
 Monolog and allows to use Monolog's Handlers.
 
-Monolog's Handlers are configured in the `config.xml` through the following
-config node:
-
-    <config>
-        <default>
-            <magemonolog>
-                <handlers>
-                    <StreamHandler>
-                        <active>1</active>
-                        <params>
-                            <stream>magemonolog.log</stream>
-                            <level>DEBUG</level>
-                            <bubble>true</bubble>
-                            <filePermission>null</filePermission>
-                            <useLocking>false</useLocking>
-                        </params>
-                    </StreamHandler>
-                    <NativeMailHandler>
-                        <active>0</active>
-                        <params>
-                            <to>dummy@example.com</to>
-                            <subject>Log</subject>
-                            <from>dummy@example.com</from>
-                            <level>ERROR</level>
-                            <bubble>true</bubble>
-                            <maxColumnWidth>70</maxColumnWidth>
-                        </params>
-                    </NativeMailHandler>
-                    <NewRelicHandler>
-                        <active>0</active>
-                        <params>
-                            <level>ERROR</level>
-                            <bubble>true</bubble>
-                            <appname>***your app name here***</appname>
-                        </params>
-                    </NewRelicHandler>
-                </handlers>
-            </magemonolog>
-        </default>
-    </config>
-
+Monolog's Handlers are configured in the `config.xml` through the config node `magemonolog/handlers`.  
 It is assumed you know Monolog's Handlers to understand the meaning of `params`
 node.
 
@@ -103,6 +63,7 @@ You can also use Monolog's Formatters like shown below:
                 <handlers>
                     <StreamHandler>
                         <active>1</active>
+                        <class>Aleron75_Magemonolog_Model_HandlerWrapper_StreamHandler</class>
                         <params>
                             <stream>%channel%.log</stream>
                             <level>DEBUG</level>

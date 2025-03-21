@@ -2,12 +2,13 @@
 declare(strict_types=1);
 
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 final class Aleron75_Magemonolog_Model_LoggerFactory
 {
     private const DEFAULT_CHANNEL_NAME = 'magento';
 
-    public function createFromConfig(?string $channelName = null): \Psr\Log\LoggerInterface
+    public function createFromConfig(?string $channelName = null): LoggerInterface
     {
         $logger = new Logger($channelName ?? self::DEFAULT_CHANNEL_NAME);
 
@@ -17,7 +18,7 @@ final class Aleron75_Magemonolog_Model_LoggerFactory
         return $logger;
     }
 
-    private function addHandlers(\Psr\Log\LoggerInterface $logger): void
+    private function addHandlers(LoggerInterface $logger): void
     {
         $handlers = Mage::getStoreConfig('magemonolog/handlers');
         if (! is_array($handlers)) {
@@ -25,7 +26,7 @@ final class Aleron75_Magemonolog_Model_LoggerFactory
         }
 
         foreach ($handlers as $config) {
-            if (! isset($config['active']) || ! $config['active']) {
+            if (! isset($config['active']) || ! $config['active'] || ! isset($config['class'])) {
                 continue;
             }
 
@@ -46,7 +47,7 @@ final class Aleron75_Magemonolog_Model_LoggerFactory
         }
     }
 
-    private function addProcessors(\Psr\Log\LoggerInterface $logger): void
+    private function addProcessors(LoggerInterface $logger): void
     {
         $processors = Mage::getStoreConfig('magemonolog/processors');
         if (! is_array($processors)) {
@@ -61,6 +62,7 @@ final class Aleron75_Magemonolog_Model_LoggerFactory
             $args = $config['params'] ?? [];
 
             $processor = new $config['class'](...$args);
+            assert($processor instanceof \Monolog\Processor\ProcessorInterface);
             $logger->pushProcessor($processor);
         }
     }
